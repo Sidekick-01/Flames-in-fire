@@ -1,93 +1,157 @@
+/* 1. Base Setup */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    background: #0d0d0d;
-    color: #fff;
-    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    overflow: hidden;
+    position: relative;
+    background-color: #f3e5d8; /* Fallback beige */
 }
 
-#admin-panel {
+/* 2. The Blurred Background Layer */
+body::before {
+    content: "";
     position: fixed;
-    top: 20px;
-    left: 20px;
-    background: rgba(20, 20, 20, 0.9);
-    border: 1px solid #333;
-    padding: 15px;
-    border-radius: 10px;
-    width: 260px;
-    font-size: 12px;
-    cursor: pointer;
-    z-index: 1000;
-}
-
-.status-header {
-    display: flex;
-    align-items: center;
-}
-
-#status-dot {
-    height: 10px;
-    width: 10px;
-    background-color: #555;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-#secret-notice {
-    margin-top: 10px;
-    border-top: 1px solid #333;
-    padding-top: 10px;
-    font-family: monospace;
-}
-
-.container {
-    text-align: center;
-    background: #1a1a1a;
-    padding: 50px;
-    border-radius: 25px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-}
-
-h1 { color: #ff3e3e; margin: 0; }
-
-input {
-    display: block;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    background: #252525;
-    border: 1px solid #444;
-    color: white;
-    border-radius: 8px;
-    box-sizing: border-box;
+    height: 100%;
+    background-image: url('background.png'); 
+    background-size: cover;
+    background-position: center;
+    filter: blur(6px) brightness(0.9); /* Subtle blur keeps the 'cartoon' vibe */
+    z-index: -1;
+    transform: scale(1.1);
 }
 
+/* 3. The Main Calculator Box */
+.container {
+    background: rgba(255, 255, 255, 0.85); /* Milky glass look */
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(139, 94, 60, 0.2); /* Soft brown shadow */
+    border: 4px solid #ffb3ba; /* Matches the pink frames in the image */
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    animation: float 4s ease-in-out infinite; /* Makes the box hover gently */
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+h1 {
+    color: #ff6b6b; /* Warm red-pink from the 'FLAMES' logo */
+    font-size: 3rem;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0px #fff;
+}
+
+.subtitle {
+    color: #8d6e63; /* Earthy brown from the chef's outlines */
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* 4. Inputs */
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 2px solid #ffe3e3;
+    border-radius: 15px;
+    outline: none;
+    font-size: 1rem;
+    transition: 0.3s;
+    background: #fffafa;
+}
+
+.input-group input:focus {
+    border-color: #ffb3ba;
+    box-shadow: 0 0 10px rgba(255, 179, 186, 0.5);
+}
+
+/* 5. The "Reveal" Button */
 #calc-btn {
-    background: #ff3e3e;
+    background: #ff6b6b; /* Bright coral red */
     color: white;
     border: none;
     padding: 15px 30px;
-    border-radius: 30px;
-    cursor: pointer;
+    border-radius: 50px;
+    font-size: 1.2rem;
     font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
 }
 
+#calc-btn:hover {
+    background: #ff5252;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+}
+
+#calc-btn:active {
+    transform: scale(0.95);
+}
+
+/* 6. Result Popup */
 .overlay {
-    display: none;
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(141, 110, 99, 0.8); /* Translucent brown */
+    display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100;
 }
 
 .popup-box {
-    background: #222;
+    background: white;
     padding: 40px;
-    border-radius: 20px;
+    border-radius: 25px;
     text-align: center;
-    border: 2px solid #ff3e3e;
+    border: 5px solid #ff6b6b;
+    transform: scale(0.8);
+    animation: popIn 0.3s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    to { transform: scale(1); }
+}
+
+.popup-box h2 {
+    color: #ff6b6b;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.popup-box button {
+    background: #8d6e63;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 10px;
+    margin-top: 20px;
+    cursor: pointer;
 }
