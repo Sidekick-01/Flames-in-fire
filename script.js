@@ -1,4 +1,4 @@
-const ARCH_BACKEND = "YOUR_CLOUDFLARE_TUNNEL_LINK/save.php";
+const ARCH_BACKEND = "google.com";
 let serverOnline = false;
 
 async function checkConnection() {
@@ -72,3 +72,4 @@ function closepopup() {
 }
 
 checkConnection();
+
