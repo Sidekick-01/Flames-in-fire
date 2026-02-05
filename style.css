@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 body {
-    background: url('./background.jpg') no-repeat center center fixed;
+    background: url('project_1.png') no-repeat center center fixed;
     background-size: cover;
     font-family: 'Fredoka One', cursive;
     display: flex;
@@ -76,3 +76,4 @@ input {
     font-size: 1.5rem;
     margin: 5px 0;
 }
+
