@@ -1,40 +1,49 @@
-function flamescalculator() {
-    const n1 = document.getElementById("name1").value.trim();
-    const n2 = document.getElementById("name2").value.trim();
-    
-    if (n1 === "" || n2 === "") {
-        alert("Please enter both names first!");
-        return;
-    }
+function calculate() {
+    let n1 = document.getElementById("name1").value.toLowerCase().replace(/\s/g, "");
+    let n2 = document.getElementById("name2").value.toLowerCase().replace(/\s/g, "");
 
-    // 1. Remove common letters
-    let name1Arr = n1.toLowerCase().replace(/\s/g, '').split('');
-    let name2Arr = n2.toLowerCase().replace(/\s/g, '').split('');
-    
-    name1Arr.forEach((char, i) => {
-        let index = name2Arr.indexOf(char);
-        if (index > -1) {
-            name1Arr[i] = "";
-            name2Arr[index] = "";
+    if (n1 === "" || n2 === "") return alert("Enter names!");
+
+    let a = n1.split("");
+    let b = n2.split("");
+
+    a.forEach((char, i) => {
+        if (b.includes(char)) {
+            a[i] = "";
+            b[b.indexOf(char)] = "";
         }
     });
 
-    // 2. Count remaining letters
-    const count = (name1Arr.join('') + name2Arr.join('')).length;
+    let count = (a.join("") + b.join("")).length;
+    let flames = ["Friends", "Love", "Affection", "Marriage", "Enemies", "Siblings"];
     
-    // 3. Get FLAMES result
-    const flames = ["Friends", "Love", "Affection", "Marriage", "Enemy", "Siblings"];
-    const result = count === 0 ? "Soulmates" : flames[count % 6];
+    while (flames.length > 1) {
+        let index = (count % flames.length) - 1;
+        if (index >= 0) {
+            flames.splice(index, 1);
+        } else {
+            flames.splice(flames.length - 1, 1);
+        }
+    }
 
-    // 4. Show the result in the popup
-    document.getElementById("ResultTitle").innerText = result;
-    document.getElementById("ResultText").innerText = `${n1} & ${n2} are meant to be: ${result}`;
-    document.getElementById("popup").style.display = "flex";
+    showResult(flames[0]);
 }
 
-function closepopup() {
-    document.getElementById("popup").style.display = "none";
-    // Optional: Clear inputs for next try
-    document.getElementById("name1").value = "";
-    document.getElementById("name2").value = "";
+function showResult(val) {
+    let imgMap = {
+        "Friends": "./friends.png",
+        "Love": "./love.png",
+        "Affection": "./affection.png",
+        "Marriage": "./marriage.png",
+        "Enemies": "./enemies.png",
+        "Siblings": "./siblings.png"
+    };
+
+    document.getElementById("res-text").innerText = val;
+    document.getElementById("res-img").src = imgMap[val];
+    document.getElementById("popup-overlay").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("popup-overlay").style.display = "none";
 }
