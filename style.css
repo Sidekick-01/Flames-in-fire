@@ -1,158 +1,119 @@
-/* 1. Base Setup */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* Import a fun, rounded font to match the cartoon style */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+    background: url('your-background-image.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Fredoka One', cursive;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    overflow: hidden;
-    position: relative;
-    background-color: #f3e5d8; /* Fallback beige */
+    height: 100vh;
+    margin: 0;
 }
 
-/* 2. The Blurred Background Layer */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('project_1.png'); 
-    background-size: cover;
-    background-position: center;
-    filter: blur(6px) brightness(0.9); /* Subtle blur keeps the 'cartoon' vibe */
-    z-index: -1;
-    transform: scale(1.1);
-}
-
-/* 3. The Main Calculator Box */
-.container {
-    background: rgba(255, 255, 255, 0.85); /* Milky glass look */
-    backdrop-filter: blur(10px);
-    padding: 40px;
-    border-radius: 30px;
-    box-shadow: 0 15px 35px rgba(139, 94, 60, 0.2); /* Soft brown shadow */
-    border: 4px solid #ffb3ba; /* Matches the pink frames in the image */
-    text-align: center;
-    max-width: 400px;
+/* The Main Calculator - Broader and Glassy */
+.calculator-card {
+    max-width: 650px; /* Broadened for a professional look */
     width: 90%;
-    animation: float 4s ease-in-out infinite; /* Makes the box hover gently */
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent */
+    backdrop-filter: blur(15px); /* The Glass effect */
+    -webkit-backdrop-filter: blur(15px);
+    border: 5px solid #8B4513; /* Chef Brown border */
+    border-radius: 35px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: #4E2C0C;
 }
 
 h1 {
-    color: #ff6b6b; /* Warm red-pink from the 'FLAMES' logo */
-    font-size: 3rem;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 0px #fff;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 0px #FFF;
 }
 
-.subtitle {
-    color: #8d6e63; /* Earthy brown from the chef's outlines */
-    margin-bottom: 25px;
-    font-weight: 600;
-}
-
-/* 4. Inputs */
-.input-group input {
+/* Input Fields */
+input[type="text"] {
     width: 100%;
-    padding: 15px;
-    margin: 10px 0;
-    border: 2px solid #ffe3e3;
-    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 18px;
+    margin: 15px 0;
+    border-radius: 20px;
+    border: 3px solid #D2691E; /* Pizza Orange */
+    background: rgba(255, 250, 240, 0.9);
+    font-size: 1.3rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #FF4500;
+    transform: scale(1.02); /* Slight pop out when typing */
     outline: none;
-    font-size: 1rem;
-    transition: 0.3s;
-    background: #fffafa;
 }
 
-.input-group input:focus {
-    border-color: #ffb3ba;
-    box-shadow: 0 0 10px rgba(255, 179, 186, 0.5);
-}
-
-/* 5. The "Reveal" Button */
-#calc-btn {
-    background: #ff6b6b; /* Bright coral red */
+/* The Reveal Button */
+.reveal-btn {
+    background: #FF4500;
     color: white;
+    padding: 15px 40px;
+    font-size: 1.5rem;
     border: none;
-    padding: 15px 30px;
     border-radius: 50px;
-    font-size: 1.2rem;
-    font-weight: bold;
     cursor: pointer;
     margin-top: 20px;
-    width: 100%;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+    box-shadow: 0 8px 0px #8B0000;
+    transition: all 0.1s;
 }
 
-#calc-btn:hover {
-    background: #ff5252;
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+.reveal-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 4px 0px #8B0000;
 }
 
-#calc-btn:active {
-    transform: scale(0.95);
-}
-
-/* 6. Result Popup */
-.overlay {
+/* Result Popup Overlay */
+#popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(141, 110, 99, 0.8); /* Translucent brown */
-    display: flex;
+    background: rgba(0, 0, 0, 0.7);
+    display: none; /* Hidden by default */
     justify-content: center;
     align-items: center;
-    z-index: 100;
+    z-index: 1000;
 }
 
-.popup-box {
-    background: white;
-    padding: 40px;
-    border-radius: 25px;
+/* The Result Box - Broad to fit Fate Panels */
+#popup {
+    width: 550px;
+    background: #FFF5EE;
+    border-radius: 30px;
+    padding: 30px;
+    border: 8px solid #D2691E;
     text-align: center;
-    border: 5px solid #ff6b6b;
-    transform: scale(0.8);
-    animation: popIn 0.3s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+/* Styling the AI-Generated Cartoon Panels */
+.result-image {
+    width: 100%; 
+    max-width: 450px; /* Large image display */
+    border-radius: 20px;
+    border: 4px solid #FADADD;
+    margin-bottom: 20px;
+}
+
+.result-text {
+    font-size: 2rem;
+    color: #FF4500;
+    margin-bottom: 20px;
+}
+
+/* Basic Animation */
 @keyframes popIn {
-    to { transform: scale(1); }
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
-
-.popup-box h2 {
-    color: #ff6b6b;
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-.popup-box button {
-    background: #8d6e63;
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 10px;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
