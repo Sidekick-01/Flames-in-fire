@@ -1,4 +1,4 @@
-function calculate() {
+/function calculate() {
     let n1 = document.getElementById("name1").value.toLowerCase().replace(/\s/g, "");
     let n2 = document.getElementById("name2").value.toLowerCase().replace(/\s/g, "");
 
@@ -31,12 +31,12 @@ function calculate() {
 
 function showResult(val) {
     let imgMap = {
-        "Friends": ".assets/friends.png",
-        "Love": ".assets//love.png",
-        "Affection": ".assets/affection.png",
-        "Marriage": ".assets/marriage.png",
-        "Enemies": ".assets/enemies.png",
-        "Siblings": ".assets/siblings.png"
+        "Friends": "./assets/friends.png",
+        "Love": "./assets/love.png",
+        "Affection": "./assets/affection.png",
+        "Marriage": "./assets/marriage.png",
+        "Enemies": "./assets/enemies.png",
+        "Siblings": "./assets/siblings.png"
     };
 
     document.getElementById("res-text").innerText = val;
@@ -47,5 +47,6 @@ function showResult(val) {
 function closePopup() {
     document.getElementById("popup-overlay").style.display = "none";
 }
+
 
 
