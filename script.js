@@ -1,4 +1,4 @@
-/function calculate() {
+function calculate() {
     let n1 = document.getElementById("name1").value.toLowerCase().replace(/\s/g, "");
     let n2 = document.getElementById("name2").value.toLowerCase().replace(/\s/g, "");
 
@@ -47,6 +47,7 @@ function showResult(val) {
 function closePopup() {
     document.getElementById("popup-overlay").style.display = "none";
 }
+
 
 
 
