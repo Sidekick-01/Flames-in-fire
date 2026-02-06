@@ -31,12 +31,12 @@ function calculate() {
 
 function showResult(val) {
     let imgMap = {
-        "Friends": ".assets//friends.png",
+        "Friends": ".assets/friends.png",
         "Love": ".assets//love.png",
-        "Affection": ".assets//affection.png",
-        "Marriage": ".assets//marriage.png",
-        "Enemies": ".assets//enemies.png",
-        "Siblings": ".assets//siblings.png"
+        "Affection": ".assets/affection.png",
+        "Marriage": ".assets/marriage.png",
+        "Enemies": ".assets/enemies.png",
+        "Siblings": ".assets/siblings.png"
     };
 
     document.getElementById("res-text").innerText = val;
@@ -47,4 +47,5 @@ function showResult(val) {
 function closePopup() {
     document.getElementById("popup-overlay").style.display = "none";
 }
+
 
