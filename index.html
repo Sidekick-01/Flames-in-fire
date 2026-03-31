@@ -15,13 +15,26 @@
     </div>
 
     <div id="popup-overlay" onclick="closePopup()">
-        <div id="popup" onclick="event.stopPropagation()">
-            <h2 id="res-text"></h2>
-            <img id="res-img" class="result-image" src="">
-            <br>
-            <button class="reveal-btn" onclick="closePopup()">Reset</button>
+    <div id="popup" onclick="event.stopPropagation()">
+        <h2 id="res-text"></h2>
+
+        <p id="fate-text" style="font-size: 1.3rem; font-weight: bold; color: #ffcc00; margin: 10px 0 15px 0; text-align: center;"></p>
+        
+        <img id="res-img" class="result-image" src="">
+        
+        <br>
+
+        <div style="text-align: center; margin: 25px 0 15px 0;">
+            <button onclick="saveAndShareResult()" 
+                    class="reveal-btn"
+                    style="background: #ff6600;">
+                🔥 Save & Share This Result
+            </button>
         </div>
+        
+        <button class="reveal-btn" onclick="closePopup()">Reset</button>
     </div>
+</div>
 
     <script src="script.js"></script>
 </body>
