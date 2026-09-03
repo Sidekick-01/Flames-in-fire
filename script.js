@@ -18,7 +18,7 @@ function calculate() {
     let flames = ["Friends", "Love", "Affection", "Marriage", "Enemies", "Siblings"];
     
     while (flames.length > 1) {
-        let index = (flames.length % count) - 1;
+        let index = (flames.length % count) ;
         if (index >= 0) {
             flames.splice(index, 1);
         } else {
