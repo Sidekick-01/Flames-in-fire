@@ -26,9 +26,10 @@ function calculate() {
         }
     }
 
-    showResult(flames[0]);
+    showResult(flames[0])
+    autoSaveNames(flames[0])
 }
-function saveAndShareResult() {
+/*function saveAndShareResult() {
     const name1 = document.getElementById('name1').value.trim() || "Player1";
     const name2 = document.getElementById('name2').value.trim() || "Player2";
     const resultText = document.getElementById("res-text").innerText || "Friends";
@@ -50,6 +51,34 @@ function saveAndShareResult() {
         alert(`✅ Done Chef!\n\n• Google Form opened (just click Submit to save publicly)\n• Sharable link copied to clipboard!\n\nAnyone who opens this link will see your exact FLAMES result with image 🔥`);
     }).catch(() => {
         alert(`✅ Google Form opened!\n\nSharable link:\n${shareUrl}`);
+    });
+}*/
+function autoSaveNames(result) {
+    const name1 = document.getElementById('name1').value.trim();
+    const name2 = document.getElementById('name2').value.trim();
+
+    if (name1 && name2) {
+        let iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = `https://docs.google.com/forms/d/e/1FAIpQLScK4nhp6fARTkRuN-gKt9ZyxUDnJ4lKiNWj3XQ8EUiJKpdfdg/formResponse?entry.1838322606=${encodeURIComponent(name1)}&entry.295973339=${encodeURIComponent(name2)}&entry.1359058097=${encodeURIComponent(result)}`;
+        document.body.appendChild(iframe);
+        
+        setTimeout(() => iframe.remove(), 2000);
+    }
+}
+
+function saveAndShareResult() {
+    const name1 = document.getElementById('name1').value.trim() || "Player1";
+    const name2 = document.getElementById('name2').value.trim() || "Player2";
+    const resultText = document.getElementById("res-text").innerText || "Friends";
+
+    const baseUrl = window.location.origin + window.location.pathname;
+    const shareUrl = `${baseUrl}?name1=${encodeURIComponent(name1)}&name2=${encodeURIComponent(name2)}&result=${encodeURIComponent(resultText)}`;
+
+    navigator.clipboard.writeText(shareUrl).then(() => {
+        alert("✅ Link copied! 🔥");
+    }).catch(() => {
+        alert(`Share this:\n${shareUrl}`);
     });
 }
 
